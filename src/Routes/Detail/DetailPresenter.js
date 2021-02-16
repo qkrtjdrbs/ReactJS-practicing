@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { Route, Link, Switch, withRouter } from "react-router-dom";
 import Youtubes from "../Youtubes";
 import Productions from "../Productions";
+import Seasons from "../Seasons";
 
 const Header = styled.header`
   width: 50%;
@@ -73,6 +74,8 @@ const ItemContainer = styled.div`
 const Item = styled.span``;
 
 const Selected = styled.div`
+  display: flex;
+  justify-content: center;
   width: 80px;
   height: 50px;
   text-align: center;
@@ -104,7 +107,7 @@ const SLink = styled(Link)`
 `;
 
 const DetailPresenter = withRouter(
-  ({ result, error, loading, sorted, location: { pathname } }) =>
+  ({ result, error, loading, sorted, isMovie, location: { pathname } }) =>
     loading ? (
       <>
         <Helmet>
@@ -175,9 +178,17 @@ const DetailPresenter = withRouter(
                   Production
                 </SLink>
               </Selected>
+              {isMovie ? (
+                <></>
+              ) : (
+                <Selected current={pathname === `/show/${result.id}/seasons`}>
+                  <SLink to={`/${sorted}/${result.id}/seasons`}>Seasons</SLink>
+                </Selected>
+              )}
             </Header>
             <Switch>
               <Route path={`/${sorted}/:id/youtube_url`} component={Youtubes} />
+              <Route path={`/show/:id/seasons`} component={Seasons} />
               <Route
                 path={`/${sorted}/:id/production_info`}
                 component={Productions}

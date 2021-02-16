@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Production from "../Components/Production";
-import { moviesApi, tvApi } from "../api";
+import Season from "../Components/Season";
 import Section from "../Components/Section";
+import { moviesApi, tvApi } from "../api";
 
-function Productions(props) {
+function Seasons(props) {
   const {
     location: { pathname },
   } = props;
@@ -45,25 +45,13 @@ function Productions(props) {
     "Loading...."
   ) : (
     <div>
-      <Section title="Production Companies">
-        {result.production_companies.map((movie) => (
-          <Production
-            key={movie.id}
-            id={movie.id}
-            title={movie.name}
-            imageUrl={movie.logo_path}
-            isMovie={isMovie}
-          />
-        ))}
-      </Section>
-      <Section title="Production Countries">
-        {result.production_countries.map((movie) => (
-          <Production
-            key={movie.id}
-            id={movie.id}
-            title={movie.name}
-            imageUrl={movie.logo_path}
-            isMovie={isMovie}
+      <Section title="Seasons">
+        {result.seasons.map((season) => (
+          <Season
+            key={season.id}
+            imageUrl={season.poster_path}
+            title={season.name}
+            episodes={season.episode_count}
           />
         ))}
       </Section>
@@ -71,4 +59,4 @@ function Productions(props) {
   );
 }
 
-export default Productions;
+export default Seasons;
