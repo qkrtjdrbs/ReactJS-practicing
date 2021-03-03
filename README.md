@@ -1,6 +1,5 @@
 # Nomflix
 Netflify link : https://objective-archimedes-797528.netlify.app/
-Learning React
 
 ## Screan
 
